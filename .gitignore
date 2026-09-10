@@ -1,0 +1,44 @@
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.prod.example
+!.env.local.example
+
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dataset files - do not upload large CSV datasets
+*.csv
+
+# Ignore Python model files by default
+*.pkl
+
+# Required NetShield AI deployment models
+!netshield-backend/app/ai/model.pkl
+!netshield-backend/app/ai/scaler.pkl
+!netshield-backend/app/ai/encoders.pkl
+!netshield-backend/app/ai/feature_columns.pkl
