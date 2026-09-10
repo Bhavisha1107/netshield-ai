@@ -78,6 +78,24 @@ docker compose --env-file .env.prod -f docker-compose.prod.yml down
 
 Back up database volumes before destructive maintenance. The production Compose file uses persistent named volumes for PostgreSQL and MongoDB.
 
+## VPS deployment from GitHub
+
+The repository includes a GitHub Actions workflow at `.github/workflows/deploy-vps.yml`. It deploys automatically after pushes to `main`, and it can also be started manually from the Actions tab.
+
+Prepare an Ubuntu VPS with Docker Engine, Docker Compose, Git, and an SSH account that can run Docker. Clone the repository on the server, then create `netshield-backend/.env.prod` from `.env.prod.example` and replace the placeholder values. Set `NEXT_PUBLIC_API_URL` to the public backend URL and `FRONTEND_ORIGINS` to the public frontend URL.
+
+Add these GitHub repository secrets:
+
+| Secret | Value |
+| --- | --- |
+| `DEPLOY_HOST` | VPS hostname or IP address |
+| `DEPLOY_USER` | SSH username |
+| `DEPLOY_PATH` | Absolute path of the cloned repository, such as `/opt/netshield-ai` |
+| `DEPLOY_SSH_KEY` | Private SSH key for the deployment account |
+| `DEPLOY_KNOWN_HOSTS` | Output of `ssh-keyscan -H <your-vps-host>` |
+
+The workflow updates the server to `origin/main`, rebuilds the containers, and starts the stack with the server-side `.env.prod`. Open the frontend on the configured `FRONTEND_PORT` after the first successful run.
+
 ## Current deployment boundary
 
 The application is containerized for a local or server deployment. HTTPS termination, DNS, firewall rules, managed database backups, and cloud secrets must be configured by the target hosting environment.
