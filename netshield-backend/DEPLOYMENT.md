@@ -96,6 +96,12 @@ Add these GitHub repository secrets:
 
 The workflow updates the server to `origin/main`, rebuilds the containers, and starts the stack with the server-side `.env.prod`. Open the frontend on the configured `FRONTEND_PORT` after the first successful run.
 
+## Render deployment
+
+The repository also includes `render.yaml` for a Render Blueprint. In the Render dashboard, choose **New > Blueprint**, connect this GitHub repository, and apply the blueprint. It creates the backend, frontend, and PostgreSQL services.
+
+Before the backend service can become healthy, provide a MongoDB Atlas connection string when Render asks for the secret `MONGO_URL`. MongoDB is required for traffic logs and is not created by the Blueprint. After deployment, verify that `NEXT_PUBLIC_API_URL` points to the backend's Render URL and that `FRONTEND_ORIGINS` exactly matches the frontend's Render URL. Free web services may sleep when idle, and database availability depends on the current Render plan.
+
 ## Current deployment boundary
 
 The application is containerized for a local or server deployment. HTTPS termination, DNS, firewall rules, managed database backups, and cloud secrets must be configured by the target hosting environment.

@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: netshield-backend
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./netshield-backend/Dockerfile
+    dockerContext: ./netshield-backend
+    healthCheckPath: /health
+    envVars:
+      - key: POSTGRES_URL
+        fromDatabase:
+          name: netshield-postgres
+          property: connectionString
+      - key: MONGO_URL
+        sync: false
+      - key: MONGO_DB_NAME
+        value: netshield
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: FRONTEND_ORIGINS
+        value: https://netshield-frontend.onrender.com
+      - key: DOCKERIZED
+        value: "false"
+
+  - type: web
+    name: netshield-frontend
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./netshield-frontend/Dockerfile
+    dockerContext: ./netshield-frontend
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://netshield-backend.onrender.com
+
+databases:
+  - name: netshield-postgres
+    plan: free
+    region: oregon
+    databaseName: netshield
+    user: netshield_user
