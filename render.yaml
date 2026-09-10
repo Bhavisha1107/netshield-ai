@@ -23,7 +23,7 @@ services:
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "60"
       - key: FRONTEND_ORIGINS
-        value: https://netshield-frontend.onrender.com
+        value: https://netshield-frontend-1ajr.onrender.com
       - key: DOCKERIZED
         value: "false"
 
@@ -36,7 +36,7 @@ services:
     dockerContext: ./netshield-frontend
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        value: https://netshield-backend.onrender.com
+        value: https://netshield-backend-p2wd.onrender.com
 
 databases:
   - name: netshield-postgres
