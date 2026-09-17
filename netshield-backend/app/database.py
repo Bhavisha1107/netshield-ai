@@ -27,6 +27,7 @@ def get_db():
 
 
 # ---------- MongoDB (raw traffic logs) ----------
+# Keep credentials in the environment rather than hard-coding them in source.
 MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "netshield")
 
