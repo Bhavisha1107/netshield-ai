@@ -31,6 +31,7 @@ def get_db():
 MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "netshield")
 
+
 mongo_client = MongoClient(MONGO_URL)
 mongo_db = mongo_client[MONGO_DB_NAME]
 traffic_collection = mongo_db["traffic_logs"]
