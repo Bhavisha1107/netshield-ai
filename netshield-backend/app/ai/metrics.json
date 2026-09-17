@@ -1,0 +1,17 @@
+{
+  "accuracy": 97.71,
+  "precision": 98.37,
+  "recall": 97.45,
+  "f1_score": 97.91,
+  "confusion_matrix": [
+    [
+      7254,
+      146
+    ],
+    [
+      231,
+      8836
+    ]
+  ],
+  "test_set_size": 16467
+}
